@@ -10,12 +10,12 @@ RUN npm run build --prod
 # Use the latest version of the official Nginx image as the base image
 FROM nginx:latest
 
-# Copy nginx config over
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
 # Copy the built application to the nginx directory
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 RUN rm -rf /usr/share/nginx/html/*
-COPY --from=build /app/dist/angular-app/browser /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
+COPY --from=build /app/dist/angular-app/browser . 
+COPY ./src/assets .
 RUN chown -R nginx:nginx /usr/share/nginx/*
 
 # Start the nginx server
