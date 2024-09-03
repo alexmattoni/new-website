@@ -9,16 +9,6 @@ services:
     networks:
       - app-network
 
-  php:
-    build:
-      context: ./php-app
-    ports:
-      - "8080:80"
-    networks:
-      - app-network
-    depends_on:
-      - db
-
   db:
     image: mysql:5.7
     volumes:

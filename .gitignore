@@ -6,6 +6,4 @@ angular-app/dist
 angular-app/.env
 angular-app/node_modules
 angular-app/.angular
-
-# PHP app ignore
-php-app/.env
+angular-app/.DS_Store
