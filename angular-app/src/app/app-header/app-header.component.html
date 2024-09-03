@@ -1,0 +1,135 @@
+<header id="header">
+      <div class="top-bar">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-9 col-xs-8">
+              <div class="top-number">
+                <p>
+                  <span class="top-number-emergency">
+                    <i class="fa fa-phone"></i> Emergency? Dial 911
+                  </span>
+                  <span class="top-number-non-emergency"
+                    >| Non-emergency:
+                    <a href="tel:5189007742" style="color:white;"
+                      >(518) 900-RPIA</a
+                    ></span
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="col-sm-3 col-xs-4">
+              <div class="social">
+                <ul class="social-share">
+                  <li>
+                    <!--
+                      USER NAME WELCOME FUNCTIONALITY -- TO FIX
+
+                    <div
+                      class="top-number"
+                      ng-if="user"
+                      style="padding-right: 5px"
+                      ng-cloak
+                    >
+                      Welcome, {{user}}!
+                    </div>
+                    !-->
+                  </li>
+                  <li>
+                    <a href="https://www.facebook.com/rpiamb" aria-label="Visit our Facebook"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a href="https://www.instagram.com/rpiambulance" aria-label="Visit our Instagram"
+                      ><i class="fa fa-instagram"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a href="https://reddit.com/u/RPIAMBULANCE" aria-label="Visit our Reddit Profile"
+                      ><i class="fa fa-reddit-alien"></i
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.container -->
+      </div>
+      <!-- /.top-bar -->
+
+      <nav class="navbar navbar-inverse" role="banner">
+        <div class="container">
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+            >
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span> <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" style="width:180px" href="#/home"
+              ><img width="90%" src="img/logo.svg" alt="logo"
+            /></a>
+          </div>
+
+          <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+              <li
+                ng-repeat="n in navbar"
+                ng-class="{'active': isActive(n), 'dropdown': n.isDropdown}"
+                ng-if="(!n.adminOnly && !n.schedulingOnly) || (n.schedulingOnly && isScheduling) || (n.adminOnly && isAdmin)"
+              >
+              <!--
+                <a
+                  ng-hide="n.isDropdown"
+                  ng-click="ensureEditDisabled()"
+                  ng-bind="n.title"
+                  ng-href="{{n.customLink ? n.link : '#/' + n.page}}"
+                ></a>
+                !-->
+                <a
+                  ng-show="n.isDropdown"
+                  class="dropdown-toggle"
+                  data-toggle="dropdown"
+                  ng-class="{'active': isActive(n)}"
+                >
+                  <span ng-bind="n.title"></span>
+                  <i class="fa fa-angle-down"></i>
+                </a>
+                <ul ng-show="n.isDropdown" class="dropdown-menu">
+                  <li
+                    ng-repeat-start="d in n.dropdownOptions track by $index"
+                    ng-click="ensureEditDisabled()"
+                    ng-class="{'active': isActive(d)}"
+                  >
+                  <!--
+                    <a ng-href="#/{{d.page}}" ng-bind="d.title"></a>
+                    !-->
+                  </li>
+                  <li
+                    ng-if="showDivider(n, $index)"
+                    role="separator"
+                    class="divider"
+                    ng-repeat-end
+                  ></li>
+                </ul>
+              </li>
+              <li>
+                <a
+                  id="nav-donate"
+                  href="https://securelb.imodules.com/s/1225/mobile/mobile.aspx?sid=1225&gid=1&pgid=6795&dids=.101&bledit=1&sort=1"
+                  >Donate</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /.container -->
+      </nav>
+      <!-- /nav -->
+</header>
+    <!-- /header -->
