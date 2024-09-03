@@ -1,35 +1,23 @@
-# Stage 1: Build the Angular application
 FROM node:18 as build
 
-# Set working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy package.json and package-lock.json to the container
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code to the container
+# Copy the current directory contents into the container at /app, then install/build
 COPY . .
-
-# Ensure the Angular CLI is installed
-RUN npm install -g @angular/cli
-
-# Build the Angular application
+RUN npm ci
 RUN npm run build --prod
 
-# Stage 2: Serve the Angular application with nginx
-FROM nginx:alpine
+# Use the latest version of the official Nginx image as the base image
+FROM nginx:latest
 
-# Remove the default nginx website
+# Copy nginx config over
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy the built application to the nginx directory
 RUN rm -rf /usr/share/nginx/html/*
+COPY --from=build /app/dist/ /usr/share/nginx/html
+RUN chown -R nginx:nginx /usr/share/nginx/*
 
-# Copy the built Angular files to the nginx html directory
-COPY --from=build /usr/src/app/dist /usr/share/nginx/html
-
-# Expose port 80
-EXPOSE 80
-
-# Start nginx
+# Start the nginx server
+EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]
