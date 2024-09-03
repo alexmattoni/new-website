@@ -15,7 +15,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy the built application to the nginx directory
 RUN rm -rf /usr/share/nginx/html/*
-COPY --from=build /app/dist/ /usr/share/nginx/html
+COPY --from=build /app/dist/angular-app/browser /usr/share/nginx/html
 RUN chown -R nginx:nginx /usr/share/nginx/*
 
 # Start the nginx server
