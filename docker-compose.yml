@@ -5,19 +5,9 @@ services:
     build:
       context: ./angular-app
     ports:
-      - "80:80"
+      - "8080:80"
     networks:
       - app-network
-
-  db:
-    image: mysql:5.7
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - app-network
-
-volumes:
-  db_data:
 
 networks:
   app-network:
