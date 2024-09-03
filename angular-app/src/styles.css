@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,300,800);
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
 /*************************
 *******Typography******
@@ -48,6 +49,7 @@ a {
     -moz-transition: color 300ms, background-color 300ms;
     -o-transition: color 300ms, background-color 300ms;
     transition: color 300ms, background-color 300ms;
+    text-decoration: none;
 }
 
 a:hover, a:focus {
@@ -247,6 +249,8 @@ body section {
 
 ul.social-share li {
     display: inline-block;
+    margin-right: 2px;
+    margin-left: 2px;
 }
 
 ul.social-share li a {
