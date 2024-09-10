@@ -120,11 +120,6 @@ a:focus {
     outline: none;
 }
 
-.dropdown-menu {
-    margin-top: -1px;
-    min-width: 180px;
-}
-
 h2.view-header {
     font-size: 36px;
     margin-top: 0;
@@ -204,10 +199,6 @@ body section {
 
 #header .search {
     display: inline-block;
-}
-
-.navbar > .container .navbar-brand {
-    margin-left: 0;
 }
 
 .top-bar {
@@ -298,17 +289,15 @@ input.search-form:hover {
     width: 180px;
 }
 
-.navbar-brand {
-    padding: 0;
-    margin: 0;
-}
-
 .navbar {
     border-radius: 0;
     margin-bottom: 0;
     background: #151515;
-    padding: 15px 0;
+    padding: 10px 0;
     padding-bottom: 0;
+    padding-left: 15px;
+    --bs-navbar-nav-link-padding-x: 0.8rem;
+    --bs-navbar-nav-link-padding-y: 1.10rem;
 }
 
 .navbar-nav {
@@ -317,7 +306,7 @@ input.search-form:hover {
 
 .navbar-nav > li {
     margin-left: 15px;
-    padding-bottom: 28px;
+    padding-bottom: 20px;
 }
 
 .navbar-inverse .navbar-nav > li > a {
@@ -336,12 +325,6 @@ input.search-form:hover {
 
 .navbar-inverse {
     border: none;
-}
-
-.navbar-inverse .navbar-brand {
-    font-size: 36px;
-    line-height: 50px;
-    color: #fff;
 }
 
 .navbar-inverse .navbar-nav > .active > a,
@@ -399,189 +382,129 @@ input.search-form:hover {
     padding-bottom: 0;
 }
 
+.navbar .navbar-nav 
+{
+    margin-right: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.navbar .nav-link
+{
+    display: inline-block;
+    font-size: 0.875rem;
+    color: white !important;
+    transition: background-color 0.3s ease; 
+    border-radius: 5px;
+    padding: 8px 20px;
+}
+
+.navbar .nav-link.active, .dropdown-active > .nav-link
+{
+    background-color: #c52d2f;
+}
+
+.navbar .nav-link:hover 
+{
+    background-color: #c52d2f;
+}
+
+/* Dropdown link style */
+.dropdown-item 
+{
+    font-size: 0.875rem;
+    padding: 8px 20px;       /* Consistent padding for dropdown items */
+    background-color: #151515;       /* Black background for dropdown items */
+    color: white;                  /* White text for dropdown items */
+    transition: background-color 0.3s ease;  /* Smooth transition for background change */
+}
+
+/* Dropdown hover and active styles */
+.dropdown-item.active, .dropdown-item:hover
+ {
+    background-color: #c52d2f;         /* Red background for active/hovered dropdown items */
+    color: white !important;       /* White text */          /* Rounded corners */
+}
+
+/* Ensure dropdowns use the same padding as the nav items */
+.nav-item .dropdown-menu 
+{
+    transform: translateY(23px);
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    background-color: #151515;
+    text-color: white;
+}
+
+/* This pseudo-element creates an invisible area to keep the dropdown open while scrolling */
+.nav-item.dropdown:hover::before
+{
+    content: "";
+    position: absolute;
+    top: 100%; /* Start right below the dropdown */
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: transparent; /* Invisible area */
+    z-index: 1; /* Ensure it’s above other content */
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(23px);
+    }
+}
+
+/* Ensure dropdown menu is visible on hover */
+.navbar .dropdown:hover .dropdown-menu {
+    display: block;
+    -webkit-animation: fadeInUp 400ms ease;
+    animation: fadeInUp 400ms ease;
+}
+
 /*************************
 *******Home Page******
 **************************/
 
-#main-slider {
+.carousel-item
+{
     position: relative;
 }
 
-.no-margin {
-    margin: 0;
-    padding: 0;
+.carousel-item img
+{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
-#main-slider .carousel .carousel-content {
-    margin-top: 150px;
-}
-
-.gray-background {
-    background-color: rgba(0, 0, 0, .6);
-    padding: 15px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
+.carousel-caption 
+{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 10px;
     border-radius: 5px;
 }
 
-#main-slider .carousel .slide-margin {
-    margin-top: 140px;
+.carousel-caption h5
+{
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
 }
 
-#main-slider .carousel h2 {
-    color: #fff;
-}
-
-#main-slider .carousel .btn-slide {
-    cursor: pointer;
-    padding: 8px 20px;
-    background: #c52d2f;
-    color: #fff;
-    border-radius: 4px;
-    margin-top: 25px;
-    display: inline-block;
-}
-
-#main-slider .carousel .slider-img {
-    text-align: right;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}
-
-#main-slider .carousel .item {
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    left: 0 !important;
-    visibility: hidden;
-    opacity: 0;
-    top: 0;
-    position: absolute;
-    width: 100%;
-    display: block !important;
-    height: 730px;
-    -webkit-transition: opacity ease-in-out 500ms;
-    -moz-transition: opacity ease-in-out 500ms;
-    -o-transition: opacity ease-in-out 500ms;
-    transition: opacity ease-in-out 500ms;
-}
-
-#main-slider .carousel .item:first-child {
-    top: auto;
-    position: relative;
-}
-
-#main-slider .carousel .item.active {
-    visibility: visible;
-    opacity: 1;
-    -webkit-transition: opacity ease-in-out 500ms;
-    -moz-transition: opacity ease-in-out 500ms;
-    -o-transition: opacity ease-in-out 500ms;
-    transition: opacity ease-in-out 500ms;
-    z-index: 0;
-}
-
-#main-slider .prev,
-#main-slider .next {
-    position: absolute;
-    top: 50%;
-    background-color: #c52d2f;
-    color: #fff;
-    display: inline-block;
-    margin-top: -25px;
-    height: 40px;
-    line-height: 40px;
-    width: 40px;
-    text-align: center;
-    border-radius: 4px;
-    z-index: 5;
-}
-
-#main-slider .prev:hover,
-#main-slider .next:hover {
-    background-color: #000;
-}
-
-#main-slider .prev {
-    left: 10px;
-}
-
-#main-slider .next {
-    right: 10px;
-}
-
-#main-slider .carousel-indicators li {
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
-    margin: 0 15px 0 0;
-    position: relative;
-}
-
-#main-slider .carousel-indicators li:after {
-    position: absolute;
-    content: "";
-    width: 24px;
-    height: 24px;
-    border-radius: 100%;
-    background: rgba(0, 0, 0, 0);
-    border: 1px solid #FFF;
-    left: -3px;
-    top: -3px;
-}
-
-#main-slider .carousel-indicators .active {
-    width: 20px;
-    height: 20px;
-    background-color: #c52d2f;
-    margin: 0 15px 0 0;
-    border: 1px solid #c52d2f;
-    position: relative;
-}
-
-#main-slider .carousel-indicators .active:after {
-    position: absolute;
-    content: "";
-    width: 24px;
-    height: 24px;
-    border-radius: 100%;
-    background: #c52d2f;
-    border: 1px solid #c52d2f;
-    left: -3px;
-    top: -3px;
-}
-
-#main-slider .active .animation.animated-item-1 {
-    -webkit-animation: fadeInUp 300ms linear 300ms both;
-    -moz-animation: fadeInUp 300ms linear 300ms both;
-    -o-animation: fadeInUp 300ms linear 300ms both;
-    -ms-animation: fadeInUp 300ms linear 300ms both;
-    animation: fadeInUp 300ms linear 300ms both;
-}
-
-#main-slider .active .animation.animated-item-2 {
-    -webkit-animation: fadeInUp 300ms linear 600ms both;
-    -moz-animation: fadeInUp 300ms linear 600ms both;
-    -o-animation: fadeInUp 300ms linear 600ms both;
-    -ms-animation: fadeInUp 300ms linear 600ms both;
-    animation: fadeInUp 300ms linear 600ms both;
-}
-
-#main-slider .active .animation.animated-item-3 {
-    -webkit-animation: fadeInUp 300ms linear 900ms both;
-    -moz-animation: fadeInUp 300ms linear 900ms both;
-    -o-animation: fadeInUp 300ms linear 900ms both;
-    -ms-animation: fadeInUp 300ms linear 900ms both;
-    animation: fadeInUp 300ms linear 900ms both;
-}
-
-#main-slider .active .animation.animated-item-4 {
-    -webkit-animation: fadeInUp 300ms linear 1200ms both;
-    -moz-animation: fadeInUp 300ms linear 1200ms both;
-    -o-animation: fadeInUp 300ms linear 1200ms both;
-    -ms-animation: fadeInUp 300ms linear 1200ms both;
-    animation: fadeInUp 300ms linear 1200ms both;
+.carousel-caption p 
+{
+    color: white;
+    font-size: 1.25rem;
+    margin: 0;
 }
 
 #feature,
@@ -996,8 +919,9 @@ a.accordion-toggle i {
     border-bottom: 0 none;
 }
 
-#partners {
-    background: url("assets/img/partners/partner_bg_w.jpg") 50% 50% no-repeat;
+#partners 
+{
+    background: url("assets/partners/partner_bg_w.jpg") 50% 50% no-repeat;
     background-size: cover;
 }
 
@@ -1072,56 +996,6 @@ a.accordion-toggle i {
 
 .about-us p {
     color: #4e4e4e;
-}
-
-#carousel-slider {
-    position: relative;
-}
-
-#carousel-slider .carousel-indicators {
-    bottom: -25px;
-}
-
-#carousel-slider .carousel-indicators li {
-    border: 1px solid #ffbd20;
-}
-
-#carousel-slider a i {
-    border: 1px solid #777;
-    border-radius: 50%;
-    font-size: 28px;
-    height: 50px;
-    padding: 8px;
-    position: absolute;
-    top: 50%;
-    width: 50px;
-    color: #777;
-}
-
-#carousel-slider a i:hover {
-    background: #bfbfbf;
-    color: #fff;
-    border: 1px solid #bfbfbf;
-}
-
-#carousel-slider
-.carousel-control {
-    width: inherit;
-}
-
-#carousel-slider .carousel-control.left i {
-    left: -25px
-}
-
-#carousel-slider .carousel-control.right i {
-    right: -25px;
-}
-
-#carousel-slider,
-.carousel-control.left,
-#carousel-slider,
-.carousel-control.right {
-    background: none;
 }
 
 .skill_text {
@@ -1531,7 +1405,7 @@ ul.social_icons li a i {
 }
 
 .clients-comments {
-    background-image: url("assets/img/image_bg.png");
+    background-image: url("assets/image_bg.png");
     background-position: center 118px;
     background-repeat: no-repeat;
     margin-bottom: 100px;
@@ -1932,7 +1806,7 @@ ul.social_icons li a i {
 **************************/
 
 .gmap-area {
-    background-image: url("assets/img/map.jpg");
+    background-image: url("assets/map.jpg");
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: cover;
@@ -2237,7 +2111,7 @@ ul.pagination > li:hover > a {
 }
 
 .search_box {
-    background-image: url("assets/img/search_icon.png");
+    background-image: url("assets/search_icon.png");
     background-position: 314px 15px;
     background-repeat: no-repeat;
     border-color: #DEDEDE;
@@ -2730,35 +2604,6 @@ span.comm-list-other {
     box-shadow: 0 0 5px #d81e05 !important;
 }
 
-video#bgvid {
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-     z-index: -100;
-    -webkit-transform: translateX(-50%) translateY(-10%);
-    /*transform: translateX(-50%) translateY(-50%);*/
-    background: url("assets/img/slider/bg2-DS.jpg") no-repeat;
-    background-size: auto;
-    text-align: right;
-}
-
-video#bgvid2{
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -100;
-    -webkit-transform: translateX(-50%) translateY(-10%);
-    /*transform: translateX(-50%) translateY(-50%);*/
-    background: url("assets/img/slider/bg3-DS.jpg") no-repeat;
-    background-size: auto;
-    text-align: right;
-}
 .text-left-al{
      text-align: left;
  }
@@ -2983,40 +2828,29 @@ table.table.table-striped tr#current-day td {
 /* Responsive stuff */
 
 /* lg */
-@media (min-width: 1200px) {
+@media (min-width: 1200px) 
+{
     /* Make Navigation Toggle on Desktop Hover */
     .dropdown:hover .dropdown-menu {
         display: block;
         -webkit-animation: fadeInUp 400ms;
         animation: fadeInUp 400ms;
     }
-
     #portfolio .row {
         margin-left: -10px;
         margin-right: -10px;
     }
-
-
-
 }
 
 /* md */
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1199px) 
+{
 
     /* Make Navigation Toggle on Desktop Hover */
     .dropdown:hover .dropdown-menu {
         display: block;
         -webkit-animation: fadeInUp 400ms;
         animation: fadeInUp 400ms;
-    }
-
-    .navbar-nav > li {
-        margin-left: 10px;
-    }
-
-    .navbar-collapse {
-        padding-left: 0;
-        padding-right: 0;
     }
 
     .recent-work-wrap .recent-work-inner h3 a {
@@ -3091,23 +2925,6 @@ table.table.table-striped tr#current-day td {
         animation: fadeInUp 400ms;
     }
 
-    .navbar-collapse {
-        padding-left: 0;
-        padding-right: 0;
-    }
-
-    .navbar-nav > li {
-        margin-left: 0;
-    }
-
-    #main-slider .carousel h1 {
-        font-size: 25px;
-    }
-
-    #main-slider .carousel h2 {
-        font-size: 20px;
-    }
-
     .tab-wrap .media .parrent.pull-left,
     .media.accordion-inner .pull-left{
         clear: both;
@@ -3171,9 +2988,6 @@ table.table.table-striped tr#current-day td {
 
 /* xs */
 @media (max-width: 767px) {
-    .container > .navbar-header, .container > .navbar-collapse{
-        margin-left: 0;
-    }
 
     .top-number{
         font-size: 14px;
@@ -3181,18 +2995,6 @@ table.table.table-striped tr#current-day td {
 
     input.search-form:hover {
         width: 120px;
-    }
-
-    .navbar-nav > li {
-        padding-bottom: 0;
-    }
-
-    #main-slider .carousel h1 {
-        font-size: 25px;
-    }
-
-    #main-slider .carousel h2 {
-        font-size: 16px;
     }
 
     .feature-wrap h2,
