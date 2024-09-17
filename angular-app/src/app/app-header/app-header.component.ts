@@ -82,6 +82,7 @@ export class app_header
   public isAuthenticated = false;
   public isAdmin = false;
   public isHomeRoute = false;
+  public userFirstName = 'user'
 
   // Use authentication service to check if user is a member or admin
   constructor(private keycloakService: KeycloakService, private router: Router) {}
@@ -97,18 +98,24 @@ export class app_header
       this.isHomeRoute = event.urlAfterRedirects === '/home';
     });
 
-    // If the user is authenticated, check if they have the admin role
+    // If the user is authenticated, check if they have the admin role and get their profile
     if (this.isAuthenticated) 
     {
+      const userProfile = await this.keycloakService.loadUserProfile();
+      if(userProfile.firstName)
+        this.userFirstName = userProfile.firstName;
+      else
+        this.userFirstName = "user";
+
       const roles = this.keycloakService.getUserRoles();
       this.isAdmin = roles.includes('admin');
     }
   }
 
-  
-
   logout() 
   {
+    this.isAuthenticated = false;
+    this.isAdmin = false;
     this.keycloakService.logout(window.location.origin).then(() => 
     {
       // Navigate to home after logout

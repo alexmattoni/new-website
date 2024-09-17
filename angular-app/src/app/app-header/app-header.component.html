@@ -21,18 +21,14 @@
           <div class="social">
             <ul class="social-share">
               <li>
-                <!--
-                  USER NAME WELCOME FUNCTIONALITY -- TODO
-
                 <div
                   class="top-number"
-                  ng-if="user"
+                  *ngIf="isAuthenticated"
                   style="padding-right: 5px"
                   ng-cloak
                 >
-                  Welcome, {{user}}!
+                  Welcome, {{userFirstName}}!
                 </div>
-                !-->
               </li>
               <li>
                 <a href="https://www.facebook.com/rpiamb" aria-label="Visit our Facebook"
@@ -72,7 +68,7 @@
 
           <!-- Guest Links Container -->
           <ng-container *ngIf="!isAuthenticated || isHomeRoute">
-            
+
             <!-- Guest Links -->
             <li class="nav-item" *ngFor="let link of guestLinks" [routerLinkActive]="['active', 'dropdown-active']" #rla="routerLinkActive">
 
@@ -150,7 +146,7 @@
             </li>
           </ng-container>
 
-          <ng-container *ngIf="isAuthenticated">
+          <ng-container *ngIf="isAuthenticated && !isHomeRoute">
             <!-- Log Out button (only show if logged in) -->
             <li class="nav-item">
               <ng-container>
