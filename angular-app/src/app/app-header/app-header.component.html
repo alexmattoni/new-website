@@ -57,7 +57,7 @@
   </div>
 
   <!-- Navbar -->
-   <nav class="navbar navbar-expand-lg navbar-dark">
+   <nav class="navbar navbar-expand-sm navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/home">
         <img src="/assets/logo.svg" alt="logo"/>
@@ -69,38 +69,48 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          
-          <!-- Guest Links -->
-          <li class="nav-item" *ngFor="let link of guestLinks" [routerLinkActive]="['active', 'dropdown-active']" #rla="routerLinkActive">
-            <ng-container *ngIf="!link.dropdownItems || link.dropdownItems.length === 0">
-              <a class="nav-link" [routerLink]="link.route">{{ link.title }}</a>
-            </ng-container>
 
-            <ng-container *ngIf="link.dropdownItems && link.dropdownItems.length > 0">
-              <!-- Dropdown -->
-              <li class="nav-item dropdown" [routerLinkActive]="['active']" [class.dropdown-active]="rla.isActive">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-                  {{ link.title }}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li *ngFor="let item of link.dropdownItems">
-                    <a class="dropdown-item" [routerLink]="item.route" routerLinkActive="active">{{ item.title }}</a>
-                  </li>
-                </ul>
-              </li>
-            </ng-container>
-          </li>
+          <!-- Guest Links Container -->
+          <ng-container *ngIf="!isAuthenticated || isHomeRoute">
+            
+            <!-- Guest Links -->
+            <li class="nav-item" *ngFor="let link of guestLinks" [routerLinkActive]="['active', 'dropdown-active']" #rla="routerLinkActive">
 
-          <!-- Member Links -->
-          <ng-container *ngIf="isAuthenticated && !isAdmin">
-            <li class="nav-item" *ngFor="let link of memberLinks" [routerLinkActive]="['active', 'dropdown-active']" #rlaMember="routerLinkActive">
+              <!-- Guest Nav Link -->
               <ng-container *ngIf="!link.dropdownItems || link.dropdownItems.length === 0">
                 <a class="nav-link" [routerLink]="link.route">{{ link.title }}</a>
               </ng-container>
 
+              <!-- Guest Dropdowns -->
               <ng-container *ngIf="link.dropdownItems && link.dropdownItems.length > 0">
                 <!-- Dropdown -->
+                <li class="nav-item dropdown" [routerLinkActive]="['active']" [class.dropdown-active]="rla.isActive">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ link.title }}
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li *ngFor="let item of link.dropdownItems">
+                      <a class="dropdown-item" [routerLink]="item.route" routerLinkActive="active">{{ item.title }}</a>
+                    </li>
+                  </ul>
+                </li>
+              </ng-container>
+            </li>
+          </ng-container>
+
+          <!-- Member Links Container -->
+          <ng-container *ngIf="isAuthenticated && !isAdmin && !isHomeRoute">
+             <!-- Member Links -->
+            <li class="nav-item" *ngFor="let link of memberLinks" [routerLinkActive]="['active', 'dropdown-active']" #rlaMember="routerLinkActive">
+
+              <!-- Member Nav Link -->
+              <ng-container *ngIf="!link.dropdownItems || link.dropdownItems.length === 0">
+                <a class="nav-link" [routerLink]="link.route">{{ link.title }}</a>
+              </ng-container>
+
+              <!-- Member Dropdowns -->
+              <ng-container *ngIf="link.dropdownItems && link.dropdownItems.length > 0">
                 <li class="nav-item dropdown" [routerLinkActive]="['active']" [class.dropdown-active]="rlaMember.isActive">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -140,6 +150,14 @@
             </li>
           </ng-container>
 
+          <ng-container *ngIf="isAuthenticated">
+            <!-- Log Out button (only show if logged in) -->
+            <li class="nav-item">
+              <ng-container>
+                  <a class="nav-link" (click)="logout()">Log Out</a>
+              </ng-container>
+            </li>
+          </ng-container>
         </ul>
       </div>
     </div>

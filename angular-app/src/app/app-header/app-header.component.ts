@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { NavLink } from '../NavLinkModel';
-
+import { KeycloakService } from 'keycloak-angular';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -48,8 +49,19 @@ export class app_header
   ];
 
   // Links for logged-in members
-  public memberLinks: NavLink[] = [
-    { title: 'Home', route: '/crew-schedule', adminOnly: false, dropdownItems: [] },
+  public memberLinks: NavLink[] = 
+  [
+    { title: 'Home', route: '/home', adminOnly: false, dropdownItems: []},
+    {
+      title: 'Scheduling',
+      route: '',
+      adminOnly: false,
+      dropdownItems:
+      [
+        { title: 'Crews', route: '/crew-schedule' },
+        { title: 'Events', route: '/event-schedule' }
+      ]
+    }
   ];
 
   // Admin-only links
@@ -69,4 +81,38 @@ export class app_header
 
   public isAuthenticated = false;
   public isAdmin = false;
+  public isHomeRoute = false;
+
+  // Use authentication service to check if user is a member or admin
+  constructor(private keycloakService: KeycloakService, private router: Router) {}
+  async ngOnInit() 
+  {
+    // Check if the user is authenticated
+    this.isAuthenticated = await this.keycloakService.isLoggedIn();
+
+    // Check if the user is trying to get to the home route (so we can always show the home stuff, even if logged in)
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.isHomeRoute = event.urlAfterRedirects === '/home';
+    });
+
+    // If the user is authenticated, check if they have the admin role
+    if (this.isAuthenticated) 
+    {
+      const roles = this.keycloakService.getUserRoles();
+      this.isAdmin = roles.includes('admin');
+    }
+  }
+
+  
+
+  logout() 
+  {
+    this.keycloakService.logout(window.location.origin).then(() => 
+    {
+      // Navigate to home after logout
+      this.router.navigate(['/home']);
+    });
+  }
 }

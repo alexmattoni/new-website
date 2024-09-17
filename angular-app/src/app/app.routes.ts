@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutRPIAComponent } from './about-rpia/about-rpia.component'
 import { KeycloakService } from 'keycloak-angular';
 import { CrewScheduleComponent } from './crew-schedule/crew-schedule.component';
+import { EventScheduleComponent } from './event-schedule/event-schedule.component';
 
 // Authentication guard protects the below routes
 export const authGuard: CanActivateFn = async (route, state) => 
@@ -31,6 +32,7 @@ export const routes: Routes =
   { path: 'home', component: HomeComponent },
   { path: 'about-rpia', component: AboutRPIAComponent },
   { path: 'crew-schedule', component: CrewScheduleComponent, canActivate: [authGuard]},
+  { path: 'event-schedule', component: EventScheduleComponent, canActivate: [authGuard]},
   /*
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },  // Authenticated users only
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },  // Admins only
