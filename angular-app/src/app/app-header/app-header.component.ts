@@ -43,13 +43,13 @@ export class app_header
       ]
     },
     { title: 'Request Coverage', route: '/request-coverage', adminOnly: false, dropdownItems: [] },
-    { title: 'Members', route: '/members', adminOnly: false, dropdownItems: [] },
+    { title: 'Members', route: '/crew-schedule', adminOnly: false, dropdownItems: [] },
     { title: 'Contact Us', route: '/contact-us', adminOnly: false, dropdownItems: [] },
   ];
 
   // Links for logged-in members
   public memberLinks: NavLink[] = [
-    { title: 'Home', route: '/dashboard', adminOnly: false, dropdownItems: [] },
+    { title: 'Home', route: '/crew-schedule', adminOnly: false, dropdownItems: [] },
   ];
 
   // Admin-only links
@@ -69,20 +69,4 @@ export class app_header
 
   public isAuthenticated = false;
   public isAdmin = false;
-
-  /*
-  AUTH STUFF FOR LATER
-  constructor(private authService: AuthService) {}
-
-  ngOnInit(): void
-   {
-    this.isAuthenticated = this.authService.isAuthenticated();
-    this.isAdmin = this.authService.isAdmin();
-  }
-
-  logout(): void 
-  {
-    this.authService.logout();
-  }
-    */
 }
