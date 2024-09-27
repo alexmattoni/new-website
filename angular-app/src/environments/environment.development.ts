@@ -1,10 +1,10 @@
 export const environment = 
 {
-    production: false,
+    production: true,
     keycloak: 
     {
-      url: 'http://localhost:8080',
-      realm: 'rpia-members',
-      clientId: 'rpia-members',
+      url: 'https://auth.rpiambulance.com/',
+      realm: 'rpia-Members',
+      clientId: 'angular-localhost',
     }
 };

@@ -11,32 +11,14 @@ This is probably not right or fully complete.
 1. Download latest Node.js
 2. Clone repository.
 3. Run 'npm install'
-4. Run 'docker compose up --build'
+4. Run 'ng serve' within the angular-app directory. It will auto-refresh on changes!
 5. Hopefully it is working.
 
 # Deployment
 
-Very simple using docker compose. Before you do that, run:
+The angular app can be be deployed using Docker. We have yet to write the Dockerfile for this.
 
-```
-echo "PG_PASS=$(openssl rand -base64 36 | tr -d '\n')" >> .env
-echo "AUTHENTIK_SECRET_KEY=$(openssl rand -base64 60 | tr -d '\n')" >> .env
-```
 
-To configure email reporting for Authentik, add the following to the .env file:
+# Important Notes
 
-```
-# SMTP Host Emails are sent to
-AUTHENTIK_EMAIL__HOST=localhost
-AUTHENTIK_EMAIL__PORT=25
-# Optionally authenticate (don't add quotation marks to your password)
-AUTHENTIK_EMAIL__USERNAME=
-AUTHENTIK_EMAIL__PASSWORD=
-# Use StartTLS
-AUTHENTIK_EMAIL__USE_TLS=false
-# Use SSL
-AUTHENTIK_EMAIL__USE_SSL=false
-AUTHENTIK_EMAIL__TIMEOUT=10
-# Email address authentik will send from, should have a correct @domain
-AUTHENTIK_EMAIL__FROM=authentik@localhost
-```
+There are two environment files within ```new-website/angular-app/src/environments```. You need to configure them to your Keycloak instance; for now they are both setup for the development instance, until we have time to fix that and deploy.
