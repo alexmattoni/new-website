@@ -26,6 +26,26 @@ export const authGuard: CanActivateFn = async (route, state) =>
   }
 };
 
+// Admin guard protects admin routes
+export const adminGuard: CanActivateFn = async (route, state) =>
+{
+  const keycloak = inject(KeycloakService);
+  try
+  {
+    const isAdmin = await keycloak.isUserInRole('website-admin');
+    if(!isAdmin)
+    {
+      return false;
+    }
+    return true;
+  }
+  catch(error)
+  {
+    console.error('Error checking Keycloak admin auth: ', error)
+    return false;
+  }
+}
+
 // All website routes and their protections
 export const routes: Routes = 
 [

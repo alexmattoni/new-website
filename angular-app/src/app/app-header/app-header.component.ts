@@ -67,6 +67,17 @@ export class app_header
   // Admin-only links
   public adminLinks: NavLink[] = 
   [
+    { title: 'Home', route: '/home', adminOnly: false, dropdownItems: []},
+    {
+      title: 'Scheduling',
+      route: '',
+      adminOnly: false,
+      dropdownItems:
+      [
+        { title: 'Crews', route: '/crew-schedule' },
+        { title: 'Events', route: '/event-schedule' }
+      ]
+    },
     { 
       title: 'Admin', 
       route: '', 
@@ -109,7 +120,7 @@ export class app_header
         this.userFirstName = "user";
 
       const roles = this.keycloakService.getUserRoles();
-      this.isAdmin = roles.includes('admin');
+      this.isAdmin = roles.includes('website-admin');
     }
   }
 

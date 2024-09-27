@@ -123,7 +123,7 @@
           </ng-container>
 
           <!-- Admin Links -->
-          <ng-container *ngIf="isAuthenticated && isAdmin">
+          <ng-container *ngIf="isAuthenticated && isAdmin && !isHomeRoute">
             <li class="nav-item" *ngFor="let link of adminLinks" [routerLinkActive]="['active', 'dropdown-active']" #rlaAdmin="routerLinkActive">
               <ng-container *ngIf="!link.dropdownItems || link.dropdownItems.length === 0">
                 <a class="nav-link" [routerLink]="link.route">{{ link.title }}</a>
