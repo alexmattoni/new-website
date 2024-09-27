@@ -92,10 +92,11 @@ export class app_header
     this.isAuthenticated = await this.keycloakService.isLoggedIn();
 
     // Check if the user is trying to get to the home route (so we can always show the home stuff, even if logged in)
+    const homeRoutes: string[] = ['/home', '/about-rpia', '/faqs', '/officers', '/apparatus', '/join', '/new-members', '/cpr-certification', '/outreach', '/request-coverage', '/contact-us']
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      this.isHomeRoute = event.urlAfterRedirects === '/home';
+      this.isHomeRoute = homeRoutes.includes(event.urlAfterRedirects);
     });
 
     // If the user is authenticated, check if they have the admin role and get their profile
