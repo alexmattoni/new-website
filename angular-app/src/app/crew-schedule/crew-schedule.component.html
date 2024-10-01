@@ -1,10 +1,14 @@
 <div class="container">
+	<p></p>
 	<div class="row">
 		<h2>Current Week</h2>
 		<div class="btn-toolbar justify-content-end">
-			<a class="btn btn-danger mx-2" href="#"><</a>
-			<a class="btn btn-danger mx-2" href="#">Today</a>
-			<a class="btn btn-danger mx-2" href="#">></a>
+			<a class="btn btn-danger mx-2" href="/crew-schedule"><</a>
+			<a class="btn btn-danger mx-2" href="/crew-schedule">Today</a>
+			<ng-container>
+			<a *ngif="canModifySchedule" class="btn btn-danger mx-2" href="/modify-schedule">Today</a>
+			</ng-container>
+			<a class="btn btn-danger mx-2" href="/crew-schedule">></a>
 		</div>
 	</div>
 	<div class="row">
