@@ -1,10 +1,19 @@
 import { NgModule, inject } from '@angular/core';
 import { RouterModule, Routes, CanActivateFn, Router } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { AboutRPIAComponent } from './about-rpia/about-rpia.component'
+import { AboutRPIAComponent } from './static-pages/public/about-rpia/about-rpia.component'
 import { KeycloakService } from 'keycloak-angular';
 import { CrewScheduleComponent } from './crew-schedule/crew-schedule.component';
 import { EventScheduleComponent } from './event-schedule/event-schedule.component';
+import { OfficersComponent } from './static-pages/public/officers/officers.component';
+import { FaqComponent } from './static-pages/public/faq/faq.component';
+import { ApparatusComponent } from './static-pages/public/apparatus/apparatus.component';
+import { JoinUsComponent } from './static-pages/public/join-us/join-us.component';
+import { NewMembersComponent } from './static-pages/public/new-members/new-members.component';
+import { CprCertificationComponent } from './static-pages/public/cpr-certification/cpr-certification.component';
+import { OutreachComponent } from './static-pages/public/outreach/outreach.component';
+import { RequestCoverageComponent } from './static-pages/public/request-coverage/request-coverage.component';
+import { ContactUsComponent } from './static-pages/public/contact-us/contact-us.component';
 
 // Authentication guard protects the below routes
 export const authGuard: CanActivateFn = async (route, state) => 
@@ -51,6 +60,15 @@ export const routes: Routes =
 [
   { path: 'home', component: HomeComponent },
   { path: 'about-rpia', component: AboutRPIAComponent },
+  { path: 'faqs', component: FaqComponent },
+  { path: 'officers', component: OfficersComponent },
+  { path: 'apparatus', component: ApparatusComponent },
+  { path: 'join', component: JoinUsComponent },
+  { path: 'new-members', component: NewMembersComponent },
+  { path: 'cpr-certification', component: CprCertificationComponent },
+  { path: 'outreach', component: OutreachComponent },
+  { path: 'request-coverage', component: RequestCoverageComponent },
+  { path: 'contact-us', component: ContactUsComponent },
   { path: 'crew-schedule', component: CrewScheduleComponent, canActivate: [authGuard]},
   { path: 'event-schedule', component: EventScheduleComponent, canActivate: [authGuard]},
   /*
