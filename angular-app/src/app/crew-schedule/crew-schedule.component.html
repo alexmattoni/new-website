@@ -6,7 +6,7 @@
 			<a class="btn btn-danger mx-2" href="/crew-schedule"><</a>
 			<a class="btn btn-danger mx-2" href="/crew-schedule">Today</a>
 			<ng-container>
-			<a *ngif="canModifySchedule" class="btn btn-danger mx-2" href="/modify-schedule">Today</a>
+			<a *ngIf="canModifySchedule" class="btn btn-danger mx-2" href="/modify-schedule">Edit</a>
 			</ng-container>
 			<a class="btn btn-danger mx-2" href="/crew-schedule">></a>
 		</div>
