@@ -1,1 +1,21 @@
-<p>event-schedule works!</p>
+<div class="container">
+<div class="row">
+	<h2>{{calendarLabel}}</h2>
+</div>
+<div class="row">
+	<div class="col-sm">
+    <div class="btn-group" id="timeframe-selector">
+      <button type="button" [class.active]="this.timeframe == 'TIMEFRAME_YEAR'"class="btn btn-danger" (click)="onChangeTimeFrame($event, 'TIMEFRAME_YEAR')">Year</button>
+      <button type="button" [class.active]="this.timeframe == 'TIMEFRAME_MONTH'" class="btn btn-danger" (click)="onChangeTimeFrame($event, 'TIMEFRAME_MONTH')">Month</button>
+      <button type="button" [class.active]="this.timeframe == 'TIMEFRAME_WEEK'"class="btn btn-danger" (click)="onChangeTimeFrame($event, 'TIMEFRAME_WEEK')">Week</button>
+      <button type="button" [class.active]="this.timeframe == 'TIMEFRAME_DAY'"class="btn btn-danger"(click)="onChangeTimeFrame($event, 'TIMEFRAME_DAY')">Day</button>
+    </div>
+	</div>
+	<div class="btn-toolbar col-sm justify-content-end">
+		<button class="btn btn-danger mx-1"><</button>
+		<button class="btn btn-danger mx-1" href="/crew-schedule">Today</button>
+		<a *ngIf="editEvents" class="btn btn-danger mx-1" href="#"><span class="fa fa-plus"></span></a>
+		<button class="btn btn-danger mx-1">></button>
+	</div>
+</div>
+</div>
