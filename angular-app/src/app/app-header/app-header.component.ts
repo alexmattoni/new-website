@@ -61,6 +61,15 @@ export class app_header
         { title: 'Crews', route: '/crew-schedule' },
         { title: 'Events', route: '/event-schedule' }
       ]
+    },
+    {
+      title: 'Tools',
+      route: '',
+      adminOnly: false,
+      dropdownItems:
+      [
+        { title: 'Fuel Log', route: '/fuel-log'}
+      ]
     }
   ];
 
@@ -78,6 +87,15 @@ export class app_header
         { title: 'Events', route: '/event-schedule' }
       ]
     },
+    {
+      title: 'Tools',
+      route: '',
+      adminOnly: false,
+      dropdownItems:
+      [
+        { title: 'Fuel Log', route: '/fuel-log'}
+      ]
+    },
     { 
       title: 'Admin', 
       route: '', 
@@ -93,7 +111,7 @@ export class app_header
   public isAuthenticated = false;
   public isAdmin = false;
   public isHomeRoute = false;
-  public userFirstName = 'user'
+  public userFirstName = 'user';
 
   // Use authentication service to check if user is a member or admin
   constructor(private keycloakService: KeycloakService, private router: Router) {}
