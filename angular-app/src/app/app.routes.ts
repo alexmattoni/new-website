@@ -14,7 +14,7 @@ import { CprCertificationComponent } from './static-pages/public/cpr-certificati
 import { OutreachComponent } from './static-pages/public/outreach/outreach.component';
 import { RequestCoverageComponent } from './static-pages/public/request-coverage/request-coverage.component';
 import { ContactUsComponent } from './static-pages/public/contact-us/contact-us.component';
-import { FuelLogComponent } from './dynamic-pages/fuel-log/fuel-log.component';
+import { FuelLogComponent } from './dynamic-pages/members/fuel-log/fuel-log.component';
 
 // Authentication guard protects the below routes
 export const authGuard: CanActivateFn = async (route, state) => 
