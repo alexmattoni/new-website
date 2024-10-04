@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { KeycloakService } from 'keycloak-angular';
 
 enum TimeFrame {
   month = "TIMEFRAME_MONTH",
@@ -41,15 +42,20 @@ function createCalendarLabel(viewDate: Date, timeframe: TimeFrame): string {
   styleUrl: './event-schedule.component.css'
 })
 export class EventScheduleComponent {
- public viewDate: Date = new Date();
- public editEvents: boolean = true;
- public timeframe: TimeFrame = TimeFrame.month;
- public calendarLabel: string = "Events for " + createCalendarLabel(this.viewDate, this.timeframe);
+  public viewDate: Date = new Date();
+  public editEvents: boolean = false;
+  public timeframe: TimeFrame = TimeFrame.month;
+  public calendarLabel: string = "Events for " + createCalendarLabel(this.viewDate, this.timeframe);
 
- onChangeTimeFrame(event, newTimeFrame: string): void {
-  this.timeframe = newTimeFrame as TimeFrame;
-  this.calendarLabel = "Events for " + createCalendarLabel(this.viewDate, this.timeframe);
- }
+  onChangeTimeFrame(event, newTimeFrame: string): void {
+    this.timeframe = newTimeFrame as TimeFrame;
+    this.calendarLabel = "Events for " + createCalendarLabel(this.viewDate, this.timeframe);
+  }
+  constructor(private keycloakService: KeycloakService) {}
+  async ngOnInit(){
+    const roles = this.keycloakService.getUserRoles();
+    this.editEvents = roles.includes('website-admin') || roles.includes('website-event-scheduler');
+  }
 
 }
 
