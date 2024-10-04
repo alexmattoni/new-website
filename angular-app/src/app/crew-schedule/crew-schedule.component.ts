@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KeycloakService } from 'keycloak-angular';
-import {readItems} from "@directus/sdk";
 
 @Component({
   selector: 'app-crew-schedule',
@@ -12,7 +11,6 @@ import {readItems} from "@directus/sdk";
 })
 export class CrewScheduleComponent implements OnInit {
   public canModifySchedule: boolean = false;
-  public memberList: Member;
 
   constructor(private keycloakService: KeycloakService) {}
   async ngOnInit(){
