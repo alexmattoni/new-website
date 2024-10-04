@@ -1,18 +1,17 @@
-<div class="container">
-	<p></p>
+<div class="container mt-5" id="NightCrews">
 	<div class="row">
-		<h2>Current Week</h2>
-		<div class="btn-toolbar justify-content-end">
-			<a class="btn btn-danger mx-2" href="/crew-schedule"><</a>
-			<a class="btn btn-danger mx-2" href="/crew-schedule">Today</a>
-			<ng-container>
-			<a *ngIf="canModifySchedule" class="btn btn-danger mx-2" href="/modify-schedule">Edit</a>
-			</ng-container>
-			<a class="btn btn-danger mx-2" href="/crew-schedule">></a>
+		<div class="col-sm">
+			<h2>Current Week</h2>
+		</div>
+		<div class="col-sm btn-toolbar justify-content-end">
+			<a class="btn btn-danger mx-1" href="/crew-schedule"><</a>
+			<a class="btn btn-danger mx-1" href="/crew-schedule">Today</a>
+			<a *ngIf="canModifySchedule" class="btn btn-danger mx-1" href="/modify-schedule">Edit</a>
+			<a class="btn btn-danger mx-1" href="/crew-schedule">></a>
 		</div>
 	</div>
-	<div class="row">
-		<table class="table table-bordered table-striped">
+	<div class="row mt-3">
+		<table class="table table-bordered">
 		<tr>
 			<th>Date</th>
 			<th>Crew Chief</th>
@@ -20,7 +19,20 @@
 			<th>Rider</th>
 			<th>Rider</th>
 		</tr>
-		<tr></tr>
+		<tr>
+			<td>Sunday<br>10/06/24</td>
+			<td>R. Rescue</td>
+			<td>R. Rescue</td>
+			<td>R. Rescue</td>
+			<td>R. Rescue</td>
+		</tr>
+		<tr>
+			<td>Monday<br>10/07/24</td>
+			<td>R. Rescue</td>
+			<td>R. Rescue</td>
+			<td>R. Rescue</td>
+			<td>R. Rescue</td>
+		</tr>
 		</table>
 	</div>
 </div>
