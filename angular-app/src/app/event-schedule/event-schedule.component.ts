@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 enum TimeFrame {
-  year = "TIMEFRAME_YEAR",
   month = "TIMEFRAME_MONTH",
   week = "TIMEFRAME_WEEK",
   day = "TIMEFRAME_DAY",
@@ -25,8 +24,6 @@ const monthNames = [
 
 function createCalendarLabel(viewDate: Date, timeframe: TimeFrame): string {
   switch(timeframe){
-  case TimeFrame.year:
-    return "" + viewDate.getFullYear();
   case TimeFrame.month:
     return monthNames[viewDate.getMonth()];
   case TimeFrame.week:
