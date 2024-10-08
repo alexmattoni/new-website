@@ -1,44 +1,60 @@
 <div class="container-fluid justify-content-center">
-	<div>
-	    <div class="row center" style="margin-top: 20px;">
-	        <h2 class="view-header">
-	            <span ng-bind-html="pageHeader" class="ng-binding">Fuel Log</span>
-	        </h2>
-	    </div>
-	</div>
-	<div style="margin-left: 40px; margin-right: 40px;">
-	    <div style="margin-bottom: 15px;">
-	    </div>
-	</div>
-	<div class="row" style="margin-bottom: 20px;">
-		<div class="col-md-4 align-self-start" >
-	        <button class="btn btn-primary">
-	            Add Entry
-	        </button>
-	    </div>
-		<div class="col btn-group align-self-end">
-		    <button class="btn fuel-btn">Both</button>
-		    <button class="btn fuel-btn">FR-59</button>
-		    <button class="btn fuel-btn">5939</button>
-		</div>
-	</div>
-    <div class="row center">
-            <div class="col">
-                <table id="current_week" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                          <th>Date</th>
-                          <th>Time</th>
-                          <th>Member</th>
-                          <th>Vehicle</th>
-                          <th>Fuel</th>
-                          <th>Mileage</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+  <!-- Header -->
+  <div class="row text-center" style="margin-top: 20px;">
+    <h2 class="view-header">
+      <span [innerHTML]="pageHeader">Fuel Log</span>
+    </h2>
+  </div>
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
+  <!-- Button and Filter -->
+  <div class="row" style="margin-bottom: 20px;">
+    <!-- Add Entry Button (left) -->
+    <div class="col" style="height: 40px; display: flex;">
+      <button class="btn btn-primary" style="height: 100%; margin: 0px;" (click)="addEntry()">Add Entry</button>
+    </div>
+
+    <!-- Filter Button Group (right, hidden on small screens) -->
+    <div class="col-md-4 btn-group" style="height: 40px;" role="group">
+      <button 
+        class="btn btn-outline-primary" 
+        [ngClass]="{'active' : selectedVehicle === 'Both'}"
+        (click)="filterVehicle('Both')">Both</button>
+      <button 
+        class="btn btn-outline-primary" 
+        [ngClass]="{'active': selectedVehicle === 'FR-59'}"
+        (click)="filterVehicle('FR-59')">FR-59</button>
+      <button 
+        class="btn btn-outline-primary" 
+        [ngClass]="{'active': selectedVehicle === '5939'}"
+        (click)="filterVehicle('5939')">5939</button>
+    </div>
+  </div>
+
+  <!-- Fuel Log Table -->
+  <div class="row center">
+    <div class="col">
+      <table id="current_week" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Member</th>
+            <th>Vehicle</th>
+            <th>Fuel</th>
+            <th>Mileage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let log of filteredFuelLogs">
+            <td>{{ log.date }}</td>
+            <td>{{ log.time }}</td>
+            <td>{{ log.member }}</td>
+            <td>{{ log.vehicle }}</td>
+            <td>{{ log.fuel }}</td>
+            <td>{{ log.mileage }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

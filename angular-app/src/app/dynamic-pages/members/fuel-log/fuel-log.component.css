@@ -1,0 +1,21 @@
+.btn-group .btn 
+{
+  border-color: grey;
+  color: black;
+  background-color: white;
+}
+
+.btn-group .btn.active
+{
+  background-color: #ebebeb;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active 
+{
+  background: #c52d2f;
+  outline: none;
+  box-shadow: none;
+}
