@@ -15,6 +15,8 @@ import { OutreachComponent } from './static-pages/public/outreach/outreach.compo
 import { RequestCoverageComponent } from './static-pages/public/request-coverage/request-coverage.component';
 import { ContactUsComponent } from './static-pages/public/contact-us/contact-us.component';
 import { FuelLogComponent } from './dynamic-pages/members/fuel-log/fuel-log.component';
+import { GrievanceReportComponent } from './static-pages/members/grievance-report/grievance-report.component';
+import { StockingIssueComponent } from './static-pages/members/stocking-issue/stocking-issue.component';
 
 // Authentication guard protects the below routes
 export const authGuard: CanActivateFn = async (route, state) => 
@@ -74,6 +76,8 @@ export const routes: Routes =
   { path: 'crew-schedule', component: CrewScheduleComponent, canActivate: [authGuard]},
   { path: 'event-schedule', component: EventScheduleComponent, canActivate: [authGuard]},
   { path: 'fuel-log', component: FuelLogComponent, canActivate: [authGuard]},
+  { path: 'grievance-form', component: GrievanceReportComponent, canActivate: [authGuard]},
+  { path: 'stocking-issue', component: StockingIssueComponent, canActivate: [authGuard]},
   /*
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },  // Authenticated users only
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },  // Admins only
