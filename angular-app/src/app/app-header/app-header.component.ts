@@ -72,6 +72,37 @@ export class app_header
         { title: 'Grievance Form', route: '/grievance-form'},
         { title: 'Stocking Form', route: '/stocking-issue'}
       ]
+    },
+    {
+      title: 'Training',
+      route: '',
+      adminOnly: false,
+      dropdownItems:
+      [
+        { title: 'Attendant', route: '/training-attendant'},
+        { title: 'Driver', route: '/training-driver'},
+        { title: 'Crew Chief', route: '/training-crewchief'},
+        { title: 'Duty Supervisor', route: '/training-dutysupervisor'},
+        { title: 'In Services', route: '/training-inservices'}
+      ]
+    },
+    {
+      title: 'Resources',
+      route: '',
+      adminOnly: false,
+      dropdownItems:
+      [
+
+      ]
+    },
+    {
+      title: 'Account',
+      route: '',
+      adminOnly: false,
+      dropdownItems:
+      [
+
+      ]
     }
   ];
 
@@ -100,6 +131,28 @@ export class app_header
         { title: 'Stocking Form', route: '/stocking-issue'}
       ]
     },
+    {
+      title: 'Training',
+      route: '',
+      adminOnly: false,
+      dropdownItems:
+      [
+        { title: 'Attendant', route: '/training-attendant'},
+        { title: 'Driver', route: '/training-driver'},
+        { title: 'Crew Chief', route: '/training-crewchief'},
+        { title: 'Duty Supervisor', route: '/training-dutysupervisor'},
+        { title: 'In Services', route: '/training-inservices'}
+      ]
+    },
+    {
+      title: 'Resources',
+      route: '',
+      adminOnly: false,
+      dropdownItems:
+      [
+
+      ]
+    },
     { 
       title: 'Admin', 
       route: '', 
@@ -108,6 +161,15 @@ export class app_header
       [
         { title: 'Modify Schedule', route: '/admin/users' },
         { title: 'Edit Default Schedule', route: '/admin/settings' }
+      ]
+    },
+    {
+      title: 'Account',
+      route: '',
+      adminOnly: false,
+      dropdownItems:
+      [
+
       ]
     }
   ];

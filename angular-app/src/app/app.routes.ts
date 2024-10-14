@@ -17,8 +17,13 @@ import { ContactUsComponent } from './static-pages/public/contact-us/contact-us.
 import { FuelLogComponent } from './dynamic-pages/members/fuel-log/fuel-log.component';
 import { GrievanceReportComponent } from './static-pages/members/grievance-report/grievance-report.component';
 import { StockingIssueComponent } from './static-pages/members/stocking-issue/stocking-issue.component';
+import { TrainingAttendantComponent } from './static-pages/members/training-attendant/training-attendant.component';
+import { TrainingDriverComponent } from './static-pages/members/training-driver/training-driver.component';
+import { TrainingCrewChiefComponent } from './static-pages/members/training-crew-chief/training-crew-chief.component';
+import { TrainingDutySupervisorComponent } from './static-pages/members/training-duty-supervisor/training-duty-supervisor.component';
+import { TrainingInServicesComponent } from './static-pages/members/training-in-services/training-in-services.component';
 
-// Authentication guard protects the below routes
+// Authentication guard protects member routes
 export const authGuard: CanActivateFn = async (route, state) => 
 {
   const keycloak = inject(KeycloakService);
@@ -78,6 +83,12 @@ export const routes: Routes =
   { path: 'fuel-log', component: FuelLogComponent, canActivate: [authGuard]},
   { path: 'grievance-form', component: GrievanceReportComponent, canActivate: [authGuard]},
   { path: 'stocking-issue', component: StockingIssueComponent, canActivate: [authGuard]},
+  { path: 'training-attendant', component: TrainingAttendantComponent, canActivate: [authGuard]},
+  { path: 'training-driver', component: TrainingDriverComponent, canActivate: [authGuard]},
+  { path: 'training-crewchief', component: TrainingCrewChiefComponent, canActivate: [authGuard]},
+  { path: 'training-dutysupervisor', component: TrainingDutySupervisorComponent, canActivate: [authGuard]},
+  { path: 'training-inservices', component: TrainingInServicesComponent, canActivate: [authGuard]},
+
   /*
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },  // Authenticated users only
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },  // Admins only
