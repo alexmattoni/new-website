@@ -145,15 +145,6 @@
               </ng-container>
             </li>
           </ng-container>
-
-          <ng-container *ngIf="isAuthenticated && !isHomeRoute">
-            <!-- Log Out button (only show if logged in) -->
-            <li class="nav-item">
-              <ng-container>
-                  <a class="nav-link" (click)="logout()">Log Out</a>
-              </ng-container>
-            </li>
-          </ng-container>
         </ul>
       </div>
     </div>

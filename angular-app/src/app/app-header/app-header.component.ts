@@ -92,7 +92,12 @@ export class app_header
       adminOnly: false,
       dropdownItems:
       [
-
+        { title: 'Bylaws', route: '/bylaws'},
+        { title: 'Consitution', route: '/constitution'},
+        { title: 'SOGs', route: '/sogs'},
+        { title: 'DOH Resources', route: '/doh-resources'},
+        { title: 'Radio Callsigns', route: '/radio-callsigns'},
+        { title: 'Forms', route: '/forms'}
       ]
     },
     {
@@ -101,7 +106,8 @@ export class app_header
       adminOnly: false,
       dropdownItems:
       [
-
+        { title: 'Settings', route: '/settings'},
+        { title: 'Logout', route: '/logout'}
       ]
     }
   ];
@@ -150,7 +156,12 @@ export class app_header
       adminOnly: false,
       dropdownItems:
       [
-
+        { title: 'Bylaws', route: '/bylaws'},
+        { title: 'Consitution', route: '/constitution'},
+        { title: 'SOGs', route: '/sogs'},
+        { title: 'DOH Resources', route: '/doh-resources'},
+        { title: 'Radio Callsigns', route: '/radio-callsigns'},
+        { title: 'Forms', route: '/forms'}
       ]
     },
     { 
@@ -169,7 +180,8 @@ export class app_header
       adminOnly: false,
       dropdownItems:
       [
-
+        { title: 'Settings', route: '/settings'},
+        { title: 'Logout', route: '/logout'}
       ]
     }
   ];
@@ -206,8 +218,16 @@ export class app_header
       const roles = this.keycloakService.getUserRoles();
       this.isAdmin = roles.includes('website-admin');
     }
+    
+    // Subscribe to router events in order to logout when appropriate
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/logout') {
+        this.keycloakService.logout();
+      }
+    });
   }
 
+  // Logout functionality
   logout() 
   {
     this.isAuthenticated = false;

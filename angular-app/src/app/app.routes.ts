@@ -1,5 +1,5 @@
-import { NgModule, inject } from '@angular/core';
-import { RouterModule, Routes, CanActivateFn, Router } from '@angular/router';
+import { NgModule, inject, OnInit, Component } from '@angular/core';
+import { RouterModule, Routes, CanActivateFn, NavigationEnd, Router } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutRPIAComponent } from './static-pages/public/about-rpia/about-rpia.component'
 import { KeycloakService } from 'keycloak-angular';
@@ -22,6 +22,12 @@ import { TrainingDriverComponent } from './static-pages/members/training-driver/
 import { TrainingCrewChiefComponent } from './static-pages/members/training-crew-chief/training-crew-chief.component';
 import { TrainingDutySupervisorComponent } from './static-pages/members/training-duty-supervisor/training-duty-supervisor.component';
 import { TrainingInServicesComponent } from './static-pages/members/training-in-services/training-in-services.component';
+import { BylawsComponent } from './static-pages/members/bylaws/bylaws.component';
+import { ConstitutionComponent } from './static-pages/members/constitution/constitution.component';
+import { StandardOperatingGuidelinesComponent } from './static-pages/members/standard-operating-guidelines/standard-operating-guidelines.component';
+import { FormsComponent } from './static-pages/members/forms/forms.component';
+import { RadioCallsignsComponent } from './static-pages/members/radio-callsigns/radio-callsigns.component';
+import { DepartmentOfHealthResourcesComponent } from './static-pages/members/department-of-health-resources/department-of-health-resources.component';
 
 // Authentication guard protects member routes
 export const authGuard: CanActivateFn = async (route, state) => 
@@ -66,6 +72,7 @@ export const adminGuard: CanActivateFn = async (route, state) =>
 // All website routes and their protections
 export const routes: Routes = 
 [
+  // Public facing side
   { path: 'home', component: HomeComponent },
   { path: 'about-rpia', component: AboutRPIAComponent },
   { path: 'faqs', component: FaqComponent },
@@ -78,6 +85,7 @@ export const routes: Routes =
   { path: 'request-coverage', component: RequestCoverageComponent },
   { path: 'contact-us', component: ContactUsComponent },
 
+  // Member facing side
   { path: 'crew-schedule', component: CrewScheduleComponent, canActivate: [authGuard]},
   { path: 'event-schedule', component: EventScheduleComponent, canActivate: [authGuard]},
   { path: 'fuel-log', component: FuelLogComponent, canActivate: [authGuard]},
@@ -88,12 +96,22 @@ export const routes: Routes =
   { path: 'training-crewchief', component: TrainingCrewChiefComponent, canActivate: [authGuard]},
   { path: 'training-dutysupervisor', component: TrainingDutySupervisorComponent, canActivate: [authGuard]},
   { path: 'training-inservices', component: TrainingInServicesComponent, canActivate: [authGuard]},
+  { path: 'bylaws', component: BylawsComponent, canActivate: [authGuard]},
+  { path: 'constitution', component: ConstitutionComponent, canActivate: [authGuard]},
+  { path: 'sogs', component: StandardOperatingGuidelinesComponent, canActivate: [authGuard]},
+  { path: 'forms', component: FormsComponent, canActivate: [authGuard]},
+  { path: 'radio-callsigns', component: RadioCallsignsComponent, canActivate: [authGuard]},
+  { path: 'doh-resources', component: DepartmentOfHealthResourcesComponent, canActivate: [authGuard]},
 
+  // Admin facing side
   /*
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },  // Authenticated users only
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },  // Admins only
   { path: 'login', component: LoginComponent },
    */
+
+  // Home/logout
+  { path: 'logout', redirectTo: '/home'},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
