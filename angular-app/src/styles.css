@@ -287,7 +287,8 @@ input.search-form:hover {
     width: 180px;
 }
 
-.navbar {
+.navbar 
+{
     border-radius: 0;
     margin-bottom: 0;
     background: #151515;
@@ -2779,12 +2780,14 @@ td.info {
 @media (min-width: 1200px) 
 {
     /* Make Navigation Toggle on Desktop Hover */
-    .dropdown:hover .dropdown-menu {
+    .dropdown:hover .dropdown-menu 
+    {
         display: block;
         -webkit-animation: fadeInUp 400ms;
         animation: fadeInUp 400ms;
     }
-    #portfolio .row {
+    #portfolio .row 
+    {
         margin-left: -10px;
         margin-right: -10px;
     }

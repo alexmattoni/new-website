@@ -11,6 +11,7 @@ import { app_footer } from './app-footer/app-footer.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent 
+{
   title = 'angular-app';
 }
