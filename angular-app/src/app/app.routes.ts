@@ -28,6 +28,8 @@ import { StandardOperatingGuidelinesComponent } from './static-pages/members/sta
 import { FormsComponent } from './static-pages/members/forms/forms.component';
 import { RadioCallsignsComponent } from './static-pages/members/radio-callsigns/radio-callsigns.component';
 import { DepartmentOfHealthResourcesComponent } from './static-pages/members/department-of-health-resources/department-of-health-resources.component';
+import { directus } from '../directus';
+import { login } from '@directus/sdk';
 
 // Authentication guard protects member routes
 export const authGuard: CanActivateFn = async (route, state) => 
@@ -41,6 +43,7 @@ export const authGuard: CanActivateFn = async (route, state) =>
       keycloak.login({ redirectUri: state.url });
       return false;
     }
+    directus.setToken(await keycloak.getToken());
     return true;
   } catch (error)
   {
