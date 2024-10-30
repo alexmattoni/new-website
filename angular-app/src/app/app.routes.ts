@@ -3,8 +3,8 @@ import { RouterModule, Routes, CanActivateFn, NavigationEnd, Router } from '@ang
 import { HomeComponent } from './home/home.component';
 import { AboutRPIAComponent } from './static-pages/public/about-rpia/about-rpia.component'
 import { KeycloakService } from 'keycloak-angular';
-import { CrewScheduleComponent } from './crew-schedule/crew-schedule.component';
-import { EventScheduleComponent } from './event-schedule/event-schedule.component';
+import { CrewScheduleComponent } from './dynamic-pages/members/crew-schedule/crew-schedule.component';
+import { EventScheduleComponent } from './dynamic-pages/members/event-schedule/event-schedule.component';
 import { OfficersComponent } from './static-pages/public/officers/officers.component';
 import { FaqComponent } from './static-pages/public/faq/faq.component';
 import { ApparatusComponent } from './static-pages/public/apparatus/apparatus.component';
@@ -28,8 +28,6 @@ import { StandardOperatingGuidelinesComponent } from './static-pages/members/sta
 import { FormsComponent } from './static-pages/members/forms/forms.component';
 import { RadioCallsignsComponent } from './static-pages/members/radio-callsigns/radio-callsigns.component';
 import { DepartmentOfHealthResourcesComponent } from './static-pages/members/department-of-health-resources/department-of-health-resources.component';
-import { directus } from '../directus';
-import { login } from '@directus/sdk';
 
 // Authentication guard protects member routes
 export const authGuard: CanActivateFn = async (route, state) => 
@@ -43,7 +41,6 @@ export const authGuard: CanActivateFn = async (route, state) =>
       keycloak.login({ redirectUri: state.url });
       return false;
     }
-    directus.setToken(await keycloak.getToken());
     return true;
   } catch (error)
   {

@@ -7,7 +7,8 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { environment } from '../environments/environment.development';
 
 // Keycloak initialization function
-export function initializeKeycloak(keycloak: KeycloakService) {
+export function initializeKeycloak(keycloak: KeycloakService) 
+{
   return () =>
     keycloak.init({
       config: 
@@ -26,7 +27,7 @@ export function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 export const appConfig: ApplicationConfig =
- {
+{
   providers: 
   [
     provideZoneChangeDetection({ eventCoalescing: true }), 

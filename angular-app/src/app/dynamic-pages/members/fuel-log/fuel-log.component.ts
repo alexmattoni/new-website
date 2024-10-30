@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { readItems } from '@directus/sdk';
-import { directus, fuelItem} from '../../../../directus';
+import { directus, fuelItem } from '../../../../directus';
 
 @Component({
   standalone: true,
@@ -10,17 +10,16 @@ import { directus, fuelItem} from '../../../../directus';
   templateUrl: './fuel-log.component.html',
   styleUrls: ['./fuel-log.component.css'],
 })
-export class FuelLogComponent 
+export class FuelLogComponent implements OnInit
 {
-
   pageHeader = 'Fuel Log';
   selectedVehicle: string = 'Both';
   fuelData: any = [];
   
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void>
+  {
     this.loadFuelData();
   }
-
 
   // Filter fuel logs based on vehicle selection
   filteredFuelLogs = [...this.fuelData];
@@ -45,6 +44,7 @@ export class FuelLogComponent
     {
       this.fuelData = await directus.request<fuelItem>(readItems('Fuel'));
       console.log(this.fuelData);
+      this.filterVehicle('Both');
     } catch (error) {
       console.error('Error fetching fuel data: ', error);
     }

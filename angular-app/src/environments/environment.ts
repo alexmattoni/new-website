@@ -5,6 +5,6 @@ export const environment =
     {
       url: 'https://auth.rpiambulance.com/',
       realm: 'rpia-Members',
-      clientId: 'angular-localhost',
+      clientId: 'DevAccount',
     }
 };
