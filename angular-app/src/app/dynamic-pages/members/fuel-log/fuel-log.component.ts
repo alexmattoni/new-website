@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { readItems } from '@directus/sdk';
-import { directus, fuelItem } from '../../../../directus';
+import { readItems, withToken } from '@directus/sdk';
+import { directus, directusToken, fuelItem } from '../../../../directus';
+import { KeycloakService } from 'keycloak-angular';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+interface DirectusSessionTokenResponse {
+  data: { access_token: string, refresh_token: string, expires: number }; // Define the expected structure
+  };
 
 @Component({
   standalone: true,
@@ -36,15 +42,16 @@ export class FuelLogComponent implements OnInit
       this.filteredFuelLogs = this.fuelData.filter(log => log.vehicle === vehicle);
     }
   }
-  
+
   // Handle fetch of fuel data
   async loadFuelData(): Promise<void>
   {
     try 
     {
-      this.fuelData = await directus.request<fuelItem>(readItems('Fuel'));
-      console.log(this.fuelData);
-      this.filterVehicle('Both');
+      await this.keycloakService.getToken().then(async keycloakToken => {
+        this.http.post('https://directus.dev1.techinems.org/auth/login/keycloak', {}).toPromise().then(async directusToken => {
+          console.log(directusToken)
+        });});
     } catch (error) {
       console.error('Error fetching fuel data: ', error);
     }
@@ -55,4 +62,6 @@ export class FuelLogComponent implements OnInit
     // Logic to add a new entry
     console.log('Add entry clicked!');
   }
+
+  constructor(private keycloakService: KeycloakService, private http: HttpClient) {}
 }
