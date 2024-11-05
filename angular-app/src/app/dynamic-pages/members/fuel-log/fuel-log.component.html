@@ -46,11 +46,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let log of filteredFuelLogs">
-            <td>{{ log.date }}</td>
-            <td>{{ log.time }}</td>
-            <td>{{ log.member }}</td>
+            <td>{{ log.date_created }}</td>
+            <td>{{ log.date_created }}</td>
+            <td>{{ log.user_created }}</td>
             <td>{{ log.vehicle }}</td>
-            <td>{{ log.fuel }}</td>
+            <td>{{ log.gallons }}</td>
             <td>{{ log.mileage }}</td>
           </tr>
         </tbody>
