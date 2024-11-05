@@ -428,7 +428,7 @@ input.search-form:hover {
     text-color: white;
 }
 
-/* This pseudo-element creates an invisible area to keep the dropdown open while scrolling */
+/* Creates an invisible area to keep the dropdown open while scrolling */
 .nav-item.dropdown:hover::before
 {
     content: "";
@@ -2789,7 +2789,8 @@ td.info {
 {
 
     /* Make Navigation Toggle on Desktop Hover */
-    .dropdown:hover .dropdown-menu {
+    .dropdown:hover .dropdown-menu 
+    {
         display: block;
         -webkit-animation: fadeInUp 400ms;
         animation: fadeInUp 400ms;
@@ -2859,14 +2860,8 @@ td.info {
 
 
 /* sm */
-@media (min-width: 768px) and (max-width: 991px) {
-    /* Make Navigation Toggle on Desktop Hover */
-    .dropdown:hover .dropdown-menu {
-        display: block;
-        -webkit-animation: fadeInUp 400ms;
-        animation: fadeInUp 400ms;
-    }
-
+@media (min-width: 768px) and (max-width: 991px) 
+{
     .tab-wrap .media .parrent.pull-left,
     .media.accordion-inner .pull-left{
         clear: both;

@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { readItems, withToken } from '@directus/sdk';
-import { directus, directusToken, fuelItem } from '../../../../directus';
 import { KeycloakService } from 'keycloak-angular';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-interface DirectusSessionTokenResponse {
-  data: { access_token: string, refresh_token: string, expires: number }; // Define the expected structure
-  };
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   standalone: true,
@@ -49,7 +43,7 @@ export class FuelLogComponent implements OnInit
     try 
     {
       await this.keycloakService.getToken().then(async keycloakToken => {
-        this.http.post('https://directus.dev1.techinems.org/auth/login/keycloak', {}).toPromise().then(async directusToken => {
+        this.http.get('https://directus.dev1.techinems.org/auth/login/keycloak', {}).toPromise().then(async directusToken => {
           console.log(directusToken)
         });});
     } catch (error) {

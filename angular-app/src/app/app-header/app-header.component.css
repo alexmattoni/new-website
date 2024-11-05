@@ -21,3 +21,30 @@
 {
 	margin-bottom: 10px;
 }
+
+/* Make the list items look better on mobile/small screens */
+@media (max-width: 991px)
+{
+	/* Dropdown link style */
+	.dropdown-item 
+	{
+	    font-size: 0.875rem;
+	    padding: 8px 20px;       /* Consistent padding for dropdown items */
+	    background-color: #151515;       /* Black background for dropdown items */
+	    color: white;                  /* White text for dropdown items */
+	    transition: background-color 0.3s ease;  /* Smooth transition for background change */
+	}
+
+	/* Dropdown hover and active styles */
+	.dropdown-item.active, .dropdown-item:hover
+	 {
+	    background-color: #c52d2f;         /* Red background for active/hovered dropdown items */
+	    color: white !important;       /* White text */          /* Rounded corners */
+	}
+
+	/* Creates an invisible area to keep the dropdown open while scrolling */
+	.nav-item.dropdown:hover::before
+	{
+	    all: unset;
+	}
+}
