@@ -41,7 +41,13 @@ export class FuelLogComponent implements OnInit
   // Handle fetch of fuel data
   async loadFuelData(): Promise<void>
   {
-    
+    try 
+    {
+      //this.fuelData = await this.http.get('https://directus.dev1.techinems.org/items/Fuel');
+    } catch (error)
+    {
+      console.error(error);
+    }
   }
   
   // Add an entry

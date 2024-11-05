@@ -28,6 +28,7 @@ import { StandardOperatingGuidelinesComponent } from './static-pages/members/sta
 import { FormsComponent } from './static-pages/members/forms/forms.component';
 import { RadioCallsignsComponent } from './static-pages/members/radio-callsigns/radio-callsigns.component';
 import { DepartmentOfHealthResourcesComponent } from './static-pages/members/department-of-health-resources/department-of-health-resources.component';
+import { directus } from '../directus';
 
 // Authentication guard protects member routes
 export const authGuard: CanActivateFn = async (route, state) => 
@@ -35,12 +36,18 @@ export const authGuard: CanActivateFn = async (route, state) =>
   const keycloak = inject(KeycloakService);
   try 
   {
+    // Check if logged in, otherwise redirect the user to do so
     const isAuthenticated = await keycloak.isLoggedIn();
     if (!isAuthenticated) 
     {
       keycloak.login({ redirectUri: state.url });
       return false;
     }
+
+    // Since this guard triggers when trying to access authenticated routes,
+    // this is a convenient time to check Directus authentication
+    directus;
+
     return true;
   } catch (error)
   {
