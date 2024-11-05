@@ -16,6 +16,7 @@ export class FuelLogComponent implements OnInit
   selectedVehicle: string = 'Both';
   fuelData: any = [];
   
+  // Load fuel data on init
   async ngOnInit(): Promise<void>
   {
     this.loadFuelData();
@@ -40,20 +41,12 @@ export class FuelLogComponent implements OnInit
   // Handle fetch of fuel data
   async loadFuelData(): Promise<void>
   {
-    try 
-    {
-      await this.keycloakService.getToken().then(async keycloakToken => {
-        this.http.get('https://directus.dev1.techinems.org/auth/login/keycloak', {}).toPromise().then(async directusToken => {
-          console.log(directusToken)
-        });});
-    } catch (error) {
-      console.error('Error fetching fuel data: ', error);
-    }
+    
   }
-
-  // Handle  adding a new entry (customize this as needed)
-  addEntry() {
-    // Logic to add a new entry
+  
+  // Add an entry
+  addEntry() 
+  {
     console.log('Add entry clicked!');
   }
 

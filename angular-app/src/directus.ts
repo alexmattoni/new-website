@@ -11,7 +11,7 @@ export type fuelItem =
 }
 
 export const directus = createDirectus('https://directus.dev1.techinems.org')
-.with(rest()).with(authentication("session", {
+.with(rest({credentials: 'include'})).with(authentication('cookie', {
     autoRefresh: true,
     credentials: 'include'
 }));
