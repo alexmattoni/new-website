@@ -11,6 +11,7 @@ export function initializeKeycloak(keycloak: KeycloakService)
 {
   return () =>
     keycloak.init({
+      enableBearerInterceptor: true,
       config: 
       {
         url: environment.keycloak.url,
