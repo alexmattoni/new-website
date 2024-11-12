@@ -4,7 +4,7 @@ The main goal is to port the [old website](https://github.com/rpiambulance/websi
 
 Once we have achieved a similar style, we will then work on modernizing features and migrating the database to something a little more extensible.
 
-# Development Environment Setup
+# Development Setup - Frontend
 
 This is probably not right or fully complete.
 
@@ -13,6 +13,13 @@ This is probably not right or fully complete.
 3. Run 'npm install' within the angular-app directory.
 4. Run 'ng serve' within the angular-app directory. It will auto-refresh on changes!
 5. Hopefully it is working.
+
+# Development Setup - Backend
+
+Reference - https://nikiforovall.github.io/keycloak-authorization-services-dotnet/getting-started.html
+
+Everything is a C# project (Alex uses JetBrains Rider as IDE of choice but anything will work). This can be run 
+to interface with the database and takes authorization requests from Keycloak.
 
 # Deployment
 

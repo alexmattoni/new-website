@@ -6,4 +6,10 @@ angular-app/dist
 angular-app/.env
 angular-app/node_modules
 angular-app/.angular
-angular-app/.DS_Store
+
+# Backend ignore (secrets)
+backend/appsettings.Development.json
+backend/appsettings.json
+backend/bin
+backend/.idea
+backend/obj
