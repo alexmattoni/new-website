@@ -1,9 +1,7 @@
-using Keycloak.AuthServices.Authentication; 
+using Keycloak.AuthServices.Authentication;
+using Keycloak.AuthServices.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add dev tools
-builder.Services.AddEndpointsApiExplorer().AddSwaggerGen();
 
 // Add authentication based on appsettings.json
 builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration); 
@@ -12,17 +10,25 @@ builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
 builder.Services.AddAuthorization(options =>
 {
     // Add more as necessary and as we develop, make sure they match the token
-    options.AddPolicy("Admin", policy => policy.RequireRole("website-admin"));
+    options.AddPolicy("admin", policy => policy.RequireRealmRoles("website-admin"));
 }); 
 
 // Boilerplate to build and use the auth
 var app = builder.Build();
 app.UseAuthentication(); 
 app.UseAuthorization();
-app.UseSwagger().UseSwaggerUI();
     
 // Add the routes
-app.MapGet("/", () => "Hello World!").RequireAuthorization();
+app.MapGet("/", () => "Successfully authorized!").RequireAuthorization();
+app.MapGet("/admin", () => "Successfully logged in as admin!").RequireAuthorization();
+
+// https://central.rpiambulance.com
+// --> /fuel
+// --> /members
+// ------>
+// ------> 
+// ------> 
+// --> /admin
 
 // Run the app
 app.Run();
