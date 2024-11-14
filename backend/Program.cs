@@ -17,18 +17,6 @@ builder.Services.AddAuthorization(options =>
 var app = builder.Build();
 app.UseAuthentication(); 
 app.UseAuthorization();
-    
-// Add the routes
-app.MapGet("/", () => "Successfully authorized!").RequireAuthorization();
-app.MapGet("/admin", () => "Successfully logged in as admin!").RequireAuthorization();
-
-// https://central.rpiambulance.com
-// --> /fuel
-// --> /members
-// ------>
-// ------> 
-// ------> 
-// --> /admin
 
 // Run the app
 app.Run();
