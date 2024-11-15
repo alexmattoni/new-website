@@ -46,7 +46,7 @@ export class FuelLogComponent implements OnInit
       var headers = new HttpHeaders();
 
 
-      this.http.get('http://[::]:8080/api/Member/me', {
+      this.http.get('http://localhost:8080/api/member/me', {
         headers: { 'Authorization': "Bearer " + await this.keycloakService.getToken()}
       }).subscribe(resp => {
         console.log(resp);

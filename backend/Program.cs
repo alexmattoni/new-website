@@ -1,9 +1,14 @@
+using backend.Data;
+using backend.Services;
 using Keycloak.AuthServices.Authentication;
 using Keycloak.AuthServices.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
 
 // Add debug logging
+builder.Logging.AddConsole();
 builder.Services.AddLogging(options =>
 {
     options.AddConsole();
@@ -11,6 +16,11 @@ builder.Services.AddLogging(options =>
     options.AddConfiguration(builder.Configuration.GetSection("Logging"));
     options.SetMinimumLevel(LogLevel.Information);
 });
+
+// Add services to the container.
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IMemberService, MemberService>();
 
 // Add authentication based on appsettings.json
 builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration); 
@@ -22,25 +32,29 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("admin", policy => policy.RequireRealmRoles("website-admin"));
 });
 
-var programPolicy = "_programPolicy";
+// Add Cors policy
+const string corsPolicy = "programPolicy";
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: programPolicy, policy =>
+    options.AddPolicy(corsPolicy, policyConf =>
     {
-        policy.WithOrigins("http://localhost:4200");
-        policy.AllowAnyHeader();
-        policy.AllowAnyOrigin();
-        
-        // Change to domain for prod
-        policy.SetIsOriginAllowed(host => true);
+        policyConf.WithOrigins("http://localhost:4200", "https://localhost:4200")
+            .SetIsOriginAllowedToAllowWildcardSubdomains()
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .AllowAnyMethod();
     });
 });
 
 // Boilerplate to build and use the auth
 var app = builder.Build();
-app.UseAuthentication(); 
+
+// Order of these matters!
+app.UseCors(corsPolicy);
+app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors(programPolicy);
+app.UseRouting();
+app.MapControllers();
 
 // Run the app
 app.Run();
