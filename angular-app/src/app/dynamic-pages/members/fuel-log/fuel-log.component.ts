@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KeycloakService } from 'keycloak-angular';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   standalone: true,
@@ -43,7 +43,14 @@ export class FuelLogComponent implements OnInit
   {
     try 
     {
-      //this.fuelData = await this.http.get('https://directus.dev1.techinems.org/items/Fuel');
+      var headers = new HttpHeaders();
+
+
+      this.http.get('http://[::]:8080/api/Member/me', {
+        headers: { 'Authorization': "Bearer " + await this.keycloakService.getToken()}
+      }).subscribe(resp => {
+        console.log(resp);
+      });
     } catch (error)
     {
       console.error(error);
