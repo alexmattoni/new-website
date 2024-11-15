@@ -46,14 +46,20 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Boilerplate to build and use the auth
+// App middleware build---order matters!
 var app = builder.Build();
+//app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
 
-// Order of these matters!
+// Add CORS
 app.UseCors(corsPolicy);
+
+// Add auth stuff
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseRouting();
+
+// Map controllers last
 app.MapControllers();
 
 // Run the app

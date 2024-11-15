@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Cors;
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/members")]
     [Authorize]  // Requires authentication for all endpoints
     public class MemberController(IMemberService memberService) : ControllerBase
     {
@@ -21,7 +21,7 @@ namespace backend.Controllers
 
             return Ok(member);
         }
-
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Member>> GetMember(Guid id)
         {
