@@ -54,3 +54,15 @@ CREATE TRIGGER update_member_profiles_updated_at
 
 -- Create index on member_profiles
 CREATE INDEX idx_member_profiles_member_id ON member_profiles(member_id);
+
+
+CREATE TYPE Vehicle as ENUM ('5939', 'FR-59')
+CREATE TABLE fuel_log
+(
+    id INT PRIMARY KEY DEFAULT,
+    member UUID REFERENCES members (members),
+    time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    vehicle Vehicle,
+    amount decimal(5,2),
+    milage decimal(12,2)
+)
