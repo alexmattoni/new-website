@@ -61,6 +61,7 @@ app.UseAuthorization();
 
 // Map controllers last
 app.MapControllers();
+app.MapGet("/", () => "Connection OK");
 
 // Run the app
 app.Run();

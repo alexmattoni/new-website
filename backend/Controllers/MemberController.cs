@@ -12,6 +12,7 @@ namespace backend.Controllers
     [Authorize]  // Requires authentication for all endpoints
     public class MemberController(IMemberService memberService) : ControllerBase
     {
+        // Get self member
         [HttpGet("me")]
         public async Task<ActionResult<Member>> GetCurrentMember()
         {
@@ -22,16 +23,7 @@ namespace backend.Controllers
             return Ok(member);
         }
         
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Member>> GetMember(Guid id)
-        {
-            var member = await memberService.GetMemberByIdAsync(id);
-            if (member == null)
-                return NotFound();
-
-            return Ok(member);
-        }
-
+        // Get self profile
         [HttpPut("me/profile")]
         public async Task<ActionResult<MemberProfile>> UpdateProfile(UpdateProfileRequest request)
         {
@@ -41,6 +33,17 @@ namespace backend.Controllers
 
             var updatedProfile = await memberService.UpdateProfileAsync(member.Id, request);
             return Ok(updatedProfile);
+        }
+        
+        // Get member based on id
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Member>> GetMember(Guid id)
+        {
+            var member = await memberService.GetMemberByIdAsync(id);
+            if (member == null)
+                return NotFound();
+
+            return Ok(member);
         }
     }
 }

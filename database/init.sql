@@ -55,7 +55,7 @@ CREATE TRIGGER update_member_profiles_updated_at
 -- Create index on member_profiles
 CREATE INDEX idx_member_profiles_member_id ON member_profiles(member_id);
 
-
+-- Create fuel table
 CREATE TYPE Vehicle as ENUM ('5939', 'FR-59')
 CREATE TABLE fuel_log
 (
@@ -66,3 +66,6 @@ CREATE TABLE fuel_log
     amount decimal(5,2),
     milage decimal(12,2)
 )
+
+-- Insert test user
+INSERT INTO members (keycloak_id, email) VALUES ('35459a04-15f8-443c-868e-caddd8732047', 'amattoni@rpiambulance.com')
