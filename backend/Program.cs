@@ -1,5 +1,4 @@
 using backend.Data;
-using backend.Services;
 using Keycloak.AuthServices.Authentication;
 using Keycloak.AuthServices.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -19,8 +18,7 @@ builder.Services.AddLogging(options =>
 
 // Add services to the container.
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IMemberService, MemberService>();
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add authentication based on appsettings.json
 builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration); 

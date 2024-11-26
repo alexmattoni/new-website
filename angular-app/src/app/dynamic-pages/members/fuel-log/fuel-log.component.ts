@@ -15,6 +15,13 @@ export class FuelLogComponent implements OnInit
   pageHeader = 'Fuel Log';
   selectedVehicle: string = 'Both';
   fuelData: any = [];
+
+  // Vehicle type mapping
+  vehicleTypeMap: { [key: number]: string } = 
+  {
+    0: '5939',
+    1: 'FR-59'
+  };
   
   // Load fuel data on init
   async ngOnInit(): Promise<void>
@@ -43,12 +50,22 @@ export class FuelLogComponent implements OnInit
   {
     try 
     {
-      var headers = new HttpHeaders();
-
-      this.http.get('http://localhost:8080/api/members/me', {
+      this.http.get('http://localhost:8080/api/fuel', 
+      {
         headers: { 'Authorization': "Bearer " + await this.keycloakService.getToken()}
-      }).subscribe(resp => {
-        console.log(resp);
+      }).subscribe(resp => 
+      {
+        // Map the fuel data to apply vehicle type mapping
+        this.fuelData = (resp as any[]).map(log => ({
+          ...log,
+          time_created: new Date(log.time).toLocaleTimeString(),
+          date_created: new Date(log.time).toLocaleDateString(),
+          vehicle: this.vehicleTypeMap[log.vehicle] || log.vehicle // map 0/1 to vehicle type
+        }));
+
+        // Initialize filtered fuel logs
+        this.filteredFuelLogs = [...this.fuelData];
+        console.log(this.fuelData);
       });
     } catch (error)
     {
