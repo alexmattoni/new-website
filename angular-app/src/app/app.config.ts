@@ -5,6 +5,7 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { environment } from '../environments/environment.development';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 // Keycloak initialization function
 export function initializeKeycloak(keycloak: KeycloakService) 
@@ -41,5 +42,5 @@ export const appConfig: ApplicationConfig =
       useFactory: initializeKeycloak,
       multi: true,
       deps: [KeycloakService]
-    }]
+    }, provideAnimationsAsync()]
 };

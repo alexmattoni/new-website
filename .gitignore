@@ -13,3 +13,4 @@ backend/appsettings.json
 backend/bin
 backend/.idea
 backend/obj
+/node_modules

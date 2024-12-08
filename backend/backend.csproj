@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
         <PackageReference Include="Keycloak.AuthServices.Authentication" Version="2.5.3" />
         <PackageReference Include="Keycloak.AuthServices.Authorization" Version="2.5.3" />
         <PackageReference Include="Keycloak.AuthServices.Common" Version="2.5.3" />

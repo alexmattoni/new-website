@@ -1,4 +1,4 @@
-using backend.Data;
+using backend.Database;
 using Keycloak.AuthServices.Authentication;
 using Keycloak.AuthServices.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +18,7 @@ builder.Services.AddLogging(options =>
 
 // Add services to the container.
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add authentication based on appsettings.json
 builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration); 
@@ -27,7 +27,7 @@ builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
 builder.Services.AddAuthorization(options =>
 {
     // Add more as necessary and as we develop, make sure they match the token
-    options.AddPolicy("admin", policy => policy.RequireRealmRoles("website-admin"));
+    options.AddPolicy("Admin", policy => policy.RequireRealmRoles("website-admin"));
 });
 
 // Add Cors policy
