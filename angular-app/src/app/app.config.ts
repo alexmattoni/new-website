@@ -42,5 +42,5 @@ export const appConfig: ApplicationConfig =
       useFactory: initializeKeycloak,
       multi: true,
       deps: [KeycloakService]
-    }, provideAnimationsAsync()]
+    }, provideAnimationsAsync(), provideAnimationsAsync()]
 };

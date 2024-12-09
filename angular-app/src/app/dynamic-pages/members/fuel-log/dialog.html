@@ -1,0 +1,32 @@
+<div class="dialog-wrapper">
+    <h1 mat-dialog-title>Add Fuel Log Entry</h1>
+    <form [formGroup]="fuelForm" (ngSubmit)="onSubmit()">
+      <div class="form-content">
+        <h4> Vehicle </h4>
+        <mat-form-field appearance="outline">
+          <mat-label>Vehicle</mat-label>
+          <mat-select formControlName="Vehicle">
+            <mat-option [value]="0">5939</mat-option>
+            <mat-option [value]="1">FR-59</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <h4> Fuel Amount </h4>
+        <mat-form-field appearance="outline">
+          <mat-label>Amount</mat-label>
+          <input matInput type="number" formControlName="Amount">
+        </mat-form-field>
+
+        <h4> Vehicle Mileage </h4>
+        <mat-form-field appearance="outline">
+          <mat-label>Mileage</mat-label>
+          <input matInput type="number" formControlName="Mileage">
+        </mat-form-field>
+      </div>
+
+      <div class="dialog-actions">
+        <button class="button-spaced" mat-button (click)="onCancel($event)">Cancel</button>
+        <button class="button-spaced" mat-raised-button color="primary" type="submit" [disabled]="!fuelForm.valid">Submit</button>
+      </div>
+    </form>
+    </div>

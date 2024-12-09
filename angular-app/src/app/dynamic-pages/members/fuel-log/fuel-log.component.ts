@@ -8,11 +8,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { NgxPaginationModule } from 'ngx-pagination';
 
-@Component({
+@Component
+({
   selector: 'app-fuel-log-dialog',
   standalone: true,
-  imports: [
+  imports: 
+  [
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
@@ -20,46 +23,35 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     ReactiveFormsModule
   ],
-  template: `
-    <div class="dialog-wrapper">
-    <h2 mat-dialog-title>Add Fuel Log Entry</h2>
-    <form [formGroup]="fuelForm" (ngSubmit)="onSubmit()">
-      <div class="form-content">
-        <mat-form-field appearance="fill">
-          <mat-label>Vehicle</mat-label>
-          <mat-select formControlName="Vehicle">
-            <mat-option [value]="0">5939</mat-option>
-            <mat-option [value]="1">FR-59</mat-option>
-          </mat-select>
-        </mat-form-field>
+  templateUrl: 'dialog.html',
+  styles: 
+  `
+  .mat-mdc-form-field
+  {
+    display: flex;
+  }
+  
+  .mat-form-field 
+  {
+    width: 100%;
+  }
 
-        <mat-form-field appearance="fill">
-          <mat-label>Amount</mat-label>
-          <input matInput type="number" formControlName="Amount">
-        </mat-form-field>
+  .button-spaced
+  {
+    margin: 10px;
+  }
 
-        <mat-form-field appearance="fill">
-          <mat-label>Mileage</mat-label>
-          <input matInput type="number" formControlName="Mileage">
-        </mat-form-field>
-      </div>
+  .dialog-actions
+  {
+    text-align: center;
+  }
 
-      <div class="dialog-actions">
-        <button mat-button (click)="onCancel()">Cancel</button>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!fuelForm.valid">
-          Submit
-        </button>
-      </div>
-      </form>
-      </div>
-
-  `,
-  styles: [`
-    mat-form-field {
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-  `]
+  .form-content
+  {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  `
 })
 export class FuelLogDialogComponent 
 {
@@ -70,31 +62,40 @@ export class FuelLogDialogComponent
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<FuelLogDialogComponent>
   ) {
-    this.fuelForm = this.fb.group({
+    this.fuelForm = this.fb.group
+    ({
       Vehicle: ['', Validators.required],
-      Amount: ['', [Validators.required, Validators.min(0)]],
-      Mileage: ['', [Validators.required, Validators.min(0)]]
+      Amount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      Mileage: ['', [Validators.required, Validators.min(0), Validators.max(1000000)]]
     });
   }
 
-  onSubmit() {
-    if (this.fuelForm.valid) {
+  onSubmit()
+  {
+    if(this.fuelForm.valid) 
+    {
       this.dialogRef.close(this.fuelForm.value);
     }
   }
 
-  onCancel() {
-    this.dialogRef.close();
+  onCancel(event: MouseEvent) 
+  {
+    // Prevent from accidentally submitting
+    event.preventDefault();
+    event.stopPropagation();
+    this.dialogRef.close(false);
   }
 }
 
-@Component({
+@Component
+({
   standalone: true,
   imports: 
   [
     CommonModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxPaginationModule
   ],
   selector: 'app-fuel-log',
   templateUrl: './fuel-log.component.html',
@@ -105,6 +106,10 @@ export class FuelLogComponent implements OnInit
   pageHeader = 'Fuel Log';
   selectedVehicle: string = 'Both';
   fuelData: any = [];
+
+  // Pagination Controls
+  currentPage = 1;
+  itemsPerPage = 10;
   
   vehicleTypeMap: { [key: number]: string } = 
   {
@@ -136,7 +141,8 @@ export class FuelLogComponent implements OnInit
   {
     try {
       const token = await this.keycloakService.getToken();
-      this.http.get('http://localhost:8080/api/fuel', {
+      this.http.get('http://localhost:8080/api/fuel', 
+      {
         headers: { 'Authorization': `Bearer ${token}`}
       }).subscribe(resp => 
         { 
@@ -164,8 +170,14 @@ export class FuelLogComponent implements OnInit
     });
 
     dialogRef.afterClosed().subscribe(async result => 
+    {
+      // Don't submit on cancel
+      if(result == false)
+        return;
+
+      // Submit on submit when there's an actual result (not undefined, like from pressing escape)
+      if(result) 
       {
-      if (result) {
         const token = await this.keycloakService.getToken();
         this.http.post('http://localhost:8080/api/fuel', 
         {
@@ -176,8 +188,8 @@ export class FuelLogComponent implements OnInit
           headers: { 'Authorization': `Bearer ${token}` }
         }).subscribe
         ({
-          next: () => {
-            console.log('Entry added successfully');
+          next: () =>
+          {
             this.loadFuelData();
           },
           error: (error) => console.error('Error adding entry:', error)

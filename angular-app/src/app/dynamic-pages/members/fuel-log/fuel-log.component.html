@@ -9,7 +9,7 @@
   <!-- Button and Filter -->
   <div class="row" style="margin-bottom: 20px;">
     <!-- Add Entry Button (left) -->
-    <div class="col" style="height: 40px; display: flex;">
+    <div class="col" style="height: 40px; display: flex; margin-bottom: 10px;">
       <button class="btn btn-primary" style="height: 100%; margin: 0px;" (click)="addEntry()">Add Entry</button>
     </div>
 
@@ -45,7 +45,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let log of filteredFuelLogs">
+          <tr *ngFor="let log of filteredFuelLogs | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
             <td>{{ log.date_created }}</td>
             <td>{{ log.time_created }}</td>
             <td>{{ log.user_created }}</td>
@@ -55,6 +55,15 @@
           </tr>
         </tbody>
       </table>
+
+      <!-- Pagination Controls -->
+       <style>
+        .styled-pagination ::ng-deep .ngx-pagination .current
+        {
+          background: #c52d2f;
+        }
+       </style>
+      <pagination-controls class="styled-pagination" (pageChange)="currentPage = $event" [autoHide]="true"></pagination-controls>
     </div>
   </div>
 </div>

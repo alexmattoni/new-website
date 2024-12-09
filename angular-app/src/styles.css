@@ -3014,14 +3014,9 @@ td.info {
     .post_reply_comments {
         padding-left: 20px;
     }
-
-
 }
 
-/* XS Portrait */
-@media (max-width: 480px) {
-
-
-}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
