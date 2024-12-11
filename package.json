@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@angular/material": "^19.0.2",
-    "ngx-pagination": "^6.0.3"
-  }
-}
