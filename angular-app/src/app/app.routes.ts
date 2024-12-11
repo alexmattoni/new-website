@@ -16,7 +16,6 @@ import { RequestCoverageComponent } from './static-pages/public/request-coverage
 import { ContactUsComponent } from './static-pages/public/contact-us/contact-us.component';
 import { FuelLogComponent } from './dynamic-pages/members/fuel-log/fuel-log.component';
 import { GrievanceReportComponent } from './static-pages/members/grievance-report/grievance-report.component';
-import { StockingIssueComponent } from './static-pages/members/stocking-issue/stocking-issue.component';
 import { TrainingAttendantComponent } from './static-pages/members/training-attendant/training-attendant.component';
 import { TrainingDriverComponent } from './static-pages/members/training-driver/training-driver.component';
 import { TrainingCrewChiefComponent } from './static-pages/members/training-crew-chief/training-crew-chief.component';
@@ -97,7 +96,6 @@ export const routes: Routes =
   { path: 'event-schedule', component: EventScheduleComponent, canActivate: [authGuard]},
   { path: 'fuel-log', component: FuelLogComponent, canActivate: [authGuard]},
   { path: 'grievance-form', component: GrievanceReportComponent, canActivate: [authGuard]},
-  { path: 'stocking-issue', component: StockingIssueComponent, canActivate: [authGuard]},
   { path: 'training-attendant', component: TrainingAttendantComponent, canActivate: [authGuard]},
   { path: 'training-driver', component: TrainingDriverComponent, canActivate: [authGuard]},
   { path: 'training-crewchief', component: TrainingCrewChiefComponent, canActivate: [authGuard]},

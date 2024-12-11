@@ -70,7 +70,6 @@ export class app_header
       [
         { title: 'Fuel Log', route: '/fuel-log'},
         { title: 'Grievance Form', route: '/grievance-form'},
-        { title: 'Stocking Form', route: '/stocking-issue'}
       ]
     },
     {
@@ -134,7 +133,6 @@ export class app_header
       [
         { title: 'Fuel Log', route: '/fuel-log'},
         { title: 'Grievance Form', route: '/grievance-form'},
-        { title: 'Stocking Form', route: '/stocking-issue'}
       ]
     },
     {
